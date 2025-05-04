@@ -23,7 +23,7 @@ describe("UserProfile", () => {
       }),
     });
 
-    render(<UserProfile userId={4} />);
+    render(<UserProfile/>);
     expect(screen.getByText(/loading/i)).toBeInTheDocument();
 
     await waitFor(() => {

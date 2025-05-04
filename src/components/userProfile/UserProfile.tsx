@@ -1,23 +1,22 @@
-import { useEffect, useState } from "react";
-import classes from "./UserProfile.module.css";
-
-interface IProps {
-  userId: number;
-}
+import { useEffect, useMemo, useState } from "react";
+import randomBetween from "../../utils/randomBetween";
 
 interface IUser {
   name: string;
   email: string;
 }
 
-function UserProfile({ userId }: IProps) {
+function UserProfile() {
   const [user, setUser] = useState<IUser | null>(null);
+  const randomUserId = useMemo(() => 
+      randomBetween(1, 10), 
+    []);
 
   useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
+    fetch(`https://jsonplaceholder.typicode.com/users/${randomUserId}`)
       .then((res) => res.json())
       .then((data) => setUser(data));
-  }, [userId]);
+  }, [randomUserId]);
 
   if (!user) return <p>Loading...</p>;
   return (
